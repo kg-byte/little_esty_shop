@@ -13,7 +13,8 @@ RSpec.describe 'merchants items index page', type: :feature do
   end
 
   it 'has all the names of a merchants items' do
-    visit "merchants/#{@merchant1.id}/items"
+    visit "/merchants/#{@merchant1.id}/items"
+
     expect(page).to have_content(@item1.name)
     expect(page).to have_content(@item2.name)
     expect(page).to have_content(@item3.name)
