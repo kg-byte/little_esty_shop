@@ -21,4 +21,10 @@ RSpec.describe 'merchants items index page', type: :feature do
     expect(page).not_to have_content(@item4.name)
     expect(page).not_to have_content(@item5.name)
   end
+
+  it 'can enable and disable an item' do 
+    visit "/merchants/#{@merchant1.id}/items"
+    save_and_open_page
+
+  end
 end
