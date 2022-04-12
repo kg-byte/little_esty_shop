@@ -22,7 +22,7 @@ RSpec.describe 'merchants items show page', type: :feature do
     expect(page).not_to have_content(@item5.selling_price)
   end
 
-  xit 'shows a link to update item info' do 
+  it 'shows a link to update item info' do 
     visit "/merchants/#{@merchant1.id}/items/#{@item1.id}"
    
     click_link "Edit Item"
@@ -40,6 +40,5 @@ RSpec.describe 'merchants items show page', type: :feature do
     expect(page).to have_content('New Item')
     expect(page).to have_content(100.00)
   end
-
 
 end
