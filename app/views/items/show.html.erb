@@ -1,3 +1,6 @@
 <h4><%= @item.name %></h4>
 <p>Description: <%= @item.description %></p>
 <p>Selling Price: $<%= @item.selling_price %></p>
+
+
+<%= link_to 'Edit Item', "/merchants/#{@merchant.id}/items/#{@item.id}/edit" %>

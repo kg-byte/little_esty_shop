@@ -21,4 +21,24 @@ RSpec.describe 'merchants items show page', type: :feature do
     expect(page).not_to have_content(@item4.name)
     expect(page).not_to have_content(@item5.selling_price)
   end
+
+  it 'shows a link to update item info' do 
+    visit "/merchants/#{@merchant1.id}/items/#{@item1.id}"
+   
+    click_link "Edit Item"
+
+    expect(current_path).to eq("/merchants/#{@merchant1.id}/items/#{@item1.id}/edit")
+
+    fill_in 'Name', with: 'New Item'
+    fill_in 'Description', with: 'New Item description'
+    fill_in 'Unit price', with: '10000'
+
+    click_button 'Save'
+    updated_item = Item.find(@item1.id)
+    expect(current_path).to eq("/merchants/#{@merchant1.id}/items/#{updated_item.id}")
+    expect(page).to have_content('New Item description')
+    expect(page).to have_content('New Item')
+    expect(page).to have_content(100.00)
+  end
+
 end

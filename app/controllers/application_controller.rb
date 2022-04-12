@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
  def set_merchant
-    @merchant = Merchant.find(params[:id])
+    @merchant = Merchant.find(params[:merchant_id])
   end
 
 
