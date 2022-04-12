@@ -1,10 +1,17 @@
 require 'rails_helper'
+require 'rake'
+Rails.application.load_tasks
+require 'database_cleaner'
 
 RSpec.describe 'merchant show page' do
 	before :each do
-		@merchant1 = Merchant.create!(name: "Schroeder-Jerde")
-		@merchant2 = Merchant.create!(name: "Schroeder-Jerde_2")
+		DatabaseCleaner.strategy = :truncation
+		DatabaseCleaner.clean
+		@merchatn...
+		DatabaseCleaner.clean
+		require 'pry'; binding.pry
 	end
+		Rake::Task['csv_sample:all'].invoke
 
 	it 'displays the merchant name' do
 		visit "/merchants/#{@merchant1.id}/dashboard"
