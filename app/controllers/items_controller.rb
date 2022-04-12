@@ -16,9 +16,13 @@ class ItemsController < ApplicationController
 
   def update
     item = Item.find(params[:item_id])
-    if item.update(item_prams)
-      item.update(item_prams)
-      redirect_to "/merchants/#{@merchant.id}/items/#{item.id}"
+    if item.update(item_params)
+      item.update(item_params)
+      if item_params[:status] 
+        redirect_to "/merchants/#{@merchant.id}/items"
+      elsif
+        redirect_to "/merchants/#{@merchant.id}/items/#{item.id}"
+      end
     else 
       redirect_to "/merchants/#{@merchant.id}/items/#{item.id}/edit"
       flash[:alert] = "Error: all required fields must be filled!}"
@@ -26,8 +30,8 @@ class ItemsController < ApplicationController
   end
 
 private
-  def item_prams
-    params.permit(:id, :name, :description, :unit_price)
+  def item_params
+    params.permit(:id, :name, :description, :unit_price, :status)
   end
 
 end

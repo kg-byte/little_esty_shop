@@ -7,7 +7,8 @@ class Item < ApplicationRecord
   validates_presence_of :name, :description, :unit_price
   validates :unit_price , numericality: { only_integer: true }
   validates :unit_price , numericality: { greater_than: 0 }
-
+  enum status: {"enabled" => 0, "disabled" => 1}
+  
     def selling_price
         BigDecimal(unit_price.to_f/100, 5)
     end
