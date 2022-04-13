@@ -13,4 +13,12 @@ class Item < ApplicationRecord
         BigDecimal(unit_price.to_f/100, 5)
     end
 
+    def self.enabled_items
+      where(status: 'enabled')
+    end
+
+    def self.disabled_items
+      where(status: 'disabled')
+   end
+
 end

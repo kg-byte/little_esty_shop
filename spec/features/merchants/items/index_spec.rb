@@ -40,4 +40,37 @@ RSpec.describe 'merchants items index page', type: :feature do
       expect(page).to have_content("Status: enabled")
     end
   end
+
+  it 'groups merchants by status' do 
+    visit "/merchants/#{@merchant1.id}/items"
+
+    within('#enabled_items') do 
+      expect(page).to have_content(@item1.name)
+      expect(page).to have_content(@item2.name)
+      expect(page).to have_content(@item3.name)
+    end
+
+    within('#disabled_items') do 
+      expect(page).to_not have_content(@item1.name)
+      expect(page).to_not have_content(@item2.name)
+      expect(page).to_not have_content(@item3.name)
+    end
+
+    within("#item-#{@item1.id}") do 
+      click_button 'Disable Item'
+    end
+
+     within('#enabled_items') do 
+      expect(page).to_not have_content(@item1.name)
+      expect(page).to have_content(@item2.name)
+      expect(page).to have_content(@item3.name)
+    end
+
+     within('#disabled_items') do 
+      expect(page).to have_content(@item1.name)
+      expect(page).to_not have_content(@item2.name)
+      expect(page).to_not have_content(@item3.name)
+    end
+
+  end
 end
