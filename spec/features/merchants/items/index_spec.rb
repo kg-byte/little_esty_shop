@@ -71,6 +71,24 @@ RSpec.describe 'merchants items index page', type: :feature do
       expect(page).to_not have_content(@item2.name)
       expect(page).to_not have_content(@item3.name)
     end
+  end
 
+
+  it 'has a link to ucreate a new item' do 
+    visit "/merchants/#{@merchant1.id}/items"
+
+    expect(page).to_not have_content('Dog Sweater')
+
+    click_link 'Add New Item'
+
+    expect(current_path).to eq("/merchants/#{@merchant1.id}/items/new")
+
+    fill_in 'Name', with: 'Dog Sweater'
+    fill_in 'Description', with: 'Perfect for small to large dogs.'
+    fill_in 'unit_price', with: 1399
+    click_button 'Submit'
+
+    expect(current_path).to eq("/merchants/#{@merchant1.id}/items")
+    expect(page).to have_content('Dog Sweater')
   end
 end
