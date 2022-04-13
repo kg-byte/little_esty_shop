@@ -26,18 +26,18 @@ RSpec.describe 'merchants items index page', type: :feature do
     visit "/merchants/#{@merchant1.id}/items"
     
     within("#item-#{@item1.id}") do 
-      expect(page).to have_content("Status: Enabled")
+
+      expect(page).to have_content("Status: enabled")
       click_button 'Disable Item'
 
       expect(current_path).to eq("/merchants/#{@merchant1.id}/items")
     end
 
     within("#item-#{@item1.id}") do 
-      expect(page).to have_content("Status: Disabled")
-
+      expect(page).to have_content("Status: disabled")
       click_button 'Enable Item'
       expect(current_path).to eq("/merchants/#{@merchant1.id}/items")
-      expect(page).to have_content("Status: Enabled")
+      expect(page).to have_content("Status: enabled")
     end
   end
 end
