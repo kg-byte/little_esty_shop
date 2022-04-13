@@ -17,6 +17,26 @@ RSpec.describe Item, type: :model do
       let!(:status) { %i[disabled enabled] }
   end
 
+  describe 'class methods' do 
+    before :each do 
+    @merchant1 = Merchant.create!(name: "Schroeder-Jerde")
+    @item1 = @merchant1.items.create!(name: "Item Qui Esse", description: "Nihil autem sit odio inventore deleniti. Est lauda...", unit_price: 75107)
+    @item2 = @merchant1.items.create!(name: "Item Autem Minima", description: "Cumque consequuntur ad. Fuga tenetur illo molestia...", unit_price: 67076)
+    @item3 = @merchant1.items.create!(name: "Item Ea Voluptatum", description: "Sunt officia eum qui molestiae. Nesciunt quidem cu...", unit_price: 32301)
+    @item4 = @merchant1.items.create!(name: "Yabba Dabba", description: "Eat your vitamins", unit_price: 30000, status: 'disabled')
+    end
+    describe '#enabled_items' do 
+      it 'returns all items with enabled status' do 
+        expect(@merchant1.items.enabled_items).to eq([@item1, @item2, @item3])
+      end
+    end
+
+      describe '#disabled_items' do 
+      it 'returns all items with disabled status' do 
+        expect(@merchant1.items.disabled_items).to eq([@item4])
+      end
+    end
+  end
 
   describe 'instance methods' do 
 
